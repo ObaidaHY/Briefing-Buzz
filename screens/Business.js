@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import { NativeBaseProvider, FlatList, ScrollView, Divider, Image, Spinner } from 'native-base';
 import { services } from '../services/services';
 import moment from 'moment'
-export default function Business() {
+
+export default function All() {
     const [newsData, setNewsData] = useState([])
     useEffect(() => {
         services('business')
@@ -14,6 +15,11 @@ export default function Business() {
                 alert(error)
             })
     }, [])
+
+    const handleNewsPress = (url) => {
+        Linking.openURL(url);
+    }
+
     return (
         <NativeBaseProvider>
             <ScrollView height={850}>
@@ -22,26 +28,28 @@ export default function Business() {
                         data={newsData}
                         renderItem={({ item }) => (
                             <View>
-                                <View style={styles.newsContainer}>
-                                    <Image
-                                        width={550}
-                                        height={250}
-                                        resizeMode={"cover"}
-                                        source={{
-                                            uri: item.urlToImage,
-                                        }}
-                                        alt="Alternate Text"
-                                    />
-                                    <Text style={styles.title}>
-                                        {item.title}
-                                    </Text>
-                                    <Text style={styles.date}>
-                                        {moment(item.publishedAt).format('LLL')}
-                                    </Text>
-                                    <Text style={styles.newsDescription}>
-                                        {item.description}
-                                    </Text>
-                                </View>
+                                <TouchableOpacity onPress={() => handleNewsPress(item.url)}>
+                                    <View style={styles.newsContainer}>
+                                        <Image
+                                            width={550}
+                                            height={250}
+                                            resizeMode={"cover"}
+                                            source={{
+                                                uri: item.urlToImage,
+                                            }}
+                                            alt="Alternate Text"
+                                        />
+                                        <Text style={styles.title}>
+                                            {item.title}
+                                        </Text>
+                                        <Text style={styles.date}>
+                                            {moment(item.publishedAt).format('LLL')}
+                                        </Text>
+                                        <Text style={styles.newsDescription}>
+                                            {item.description}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
                                 <Divider my={2} bg="#e0e0e0" />
                             </View>
                         )}
