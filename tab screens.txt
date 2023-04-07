@@ -1,0 +1,47 @@
+<Tab.Screen name="FavoritesScreen" component={FavoritesScreen}
+          options={{
+            tabBarIcon: (props) => (
+              <Icon type='ionicon' name="star" color={props.color} />
+            ),
+        }}  />
+        <Tab.Screen name="SummaryScreen" component={SummaryScreen}
+          options={{
+            tabBarIcon: (props) => (
+              <Icon type='ionicon' name="align-left" color={props.color} />
+            ),
+          }}  />
+
+
+
+
+
+
+
+
+<Tab.Screen name="Business" component={Business}
+          options={{
+            tabBarIcon: (props) => (
+              <Icon type='feather' name='dollar-sign' color={props.color} />
+            ),
+          }} />
+
+        <Tab.Screen name="Health" component={HealthScreen}
+          options={{
+            tabBarIcon: (props) => (
+              <Icon type='feather' name='heart' color={props.color} />
+            ),
+          }} />
+
+        <Tab.Screen name="Sports" component={SportsScreen}
+          options={{
+            tabBarIcon: (props) => (
+              <Icon type='ionicon' name="tennisball-outline" color={props.color} />
+            ),
+          }} />
+
+        <Tab.Screen name="Tech" component={TechScreen}
+          options={{
+            tabBarIcon: (props) => (
+              <Icon type='ionicon' name="hardware-chip-outline" color={props.color} />
+            ),
+          }} />
