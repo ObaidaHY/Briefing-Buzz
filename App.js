@@ -10,17 +10,17 @@ import All from './screens/All';
 //import TechScreen from './screens/Tech';
 import { Icon } from 'react-native-elements'
 import FavoritesScreen from './screens/FavoritesScreen';
-//import SummaryScreen from './screens/SummaryScreen';
+import SummaryScreen from './screens/SummaryScreen';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-      <Tab.Screen name="All" component={All}
+      <Tab.Screen name="News" component={All}
           options={{
             tabBarIcon: (props) => (
-              <Icon type='feather' name='home' color={props.color} />
+              <Icon type='ionicon' name='newspaper-outline' color={props.color} />
             ),
           }} />
 
@@ -31,6 +31,12 @@ export default function App() {
               <Icon type='ionicon' name="star" color={props.color} />
             ),
           }} />
+        <Tab.Screen name="Brief" component={SummaryScreen}
+          options={{
+            tabBarIcon: (props) => (
+              <Icon type='feather' name="align-left" color={props.color} />
+            ),
+          }}  />
         
       </Tab.Navigator>
     </NavigationContainer>
