@@ -1,0 +1,120 @@
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
+import { NativeBaseProvider, FlatList, ScrollView, Divider, Image, Spinner } from 'native-base';
+import moment from 'moment';
+
+export default function SummaryScreen() {
+  const [newsData, setNewsData] = useState([]);
+  const [summarizedArticles, setSummarizedArticles] = useState([]);
+
+  useEffect(() => {
+    // Fetch news data from news API
+    fetch('<NEWS_API_URL>')
+      .then(response => response.json())
+      .then(newsData => {
+        setNewsData(newsData.articles);
+
+        // Summarize each news article using the AI tool API
+        const promises = newsData.articles.map(article => {
+          return fetch('https://api.smmry.com/&SM_API_KEY=CC9996B59B&SM_LENGTH=7', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              text: article.content
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Return summarized article
+            return {
+              ...article,
+              summary: data.summary
+            };
+          });
+        });
+
+        // Wait for all promises to resolve
+        Promise.all(promises)
+          .then(summarizedArticles => {
+            setSummarizedArticles(summarizedArticles);
+          });
+      })
+      .catch(error => {
+        alert(error);
+      });
+  }, []);
+
+  const handleNewsPress = (url) => {
+    Linking.openURL(url);
+  };
+
+  return (
+    <NativeBaseProvider>
+      <ScrollView height={850}>
+        {summarizedArticles.length > 0 ? (
+          <FlatList
+            data={summarizedArticles}
+            renderItem={({ item }) => (
+              <View>
+                <TouchableOpacity onPress={() => handleNewsPress(item.url)}>
+                      <View style={styles.newsContainer}>
+                        <Image
+                          width={550}
+                          height={250}
+                          resizeMode={"cover"}
+                          source={{
+                            uri: item.urlToImage,
+                          }}
+                          alt="Alternate Text"
+                        />
+                        <Text style={styles.title}>
+                          {item.title}
+                        </Text>
+                        <Text style={styles.date}>
+                          {moment(item.publishedAt).format('LLL')}
+                        </Text>
+                        <Text style={styles.newsDescription}>
+                          {item.summary}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    <Divider my={2} bg="#e0e0e0" />
+                  </View>
+                )}
+                keyExtractor={(item) => item.id}
+              />
+            ) : (
+              <View style={styles.spinner}>
+                <Spinner color="danger.400" />
+              </View>
+            )}
+          </ScrollView>
+        </NativeBaseProvider>
+      );
+    }
+
+const styles = StyleSheet.create({
+  newsContainer: {
+    padding: 10
+  },
+  title: {
+    fontSize: 18,
+    marginTop: 10,
+    fontWeight: "600"
+  },
+  newsDescription: {
+    fontSize: 16,
+    marginTop: 10
+  },
+  date: {
+    fontSize: 14
+  },
+  spinner: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 400
+  }
+});
