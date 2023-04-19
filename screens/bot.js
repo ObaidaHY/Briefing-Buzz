@@ -51,8 +51,6 @@ import NewsAPI from 'newsapi';
 import cheerio from 'cheerio'
 //const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI('206b9ac974c74f53b9f44291c63eaeed');
-const apiKey = "206b9ac974c74f53b9f44291c63eaeed";
-const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
 
 /*fetch(url)
   .then(response => response.json())
@@ -65,13 +63,14 @@ const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
 async function getArticles() {
   const topHeadlines = await newsapi.v2.topHeadlines({
     country: 'us',
-    category: 'general'
+    category: 'general',
+    pageSize: 20
   });
 
   const articles = topHeadlines.articles;
   const fullArticles = [];
 
-  for (let i = 0; i < Math.min(articles.length, 5); i++) {
+  for (let i = 0; i < Math.min(articles.length, 10); i++) {
     const article = articles[i];
     const response = await fetch(article.url);
     const html = await response.text();
@@ -85,10 +84,17 @@ async function getArticles() {
 
 var articles = await getArticles()
 
-//console.log(articles[0]);
-var content_pipe = await pipeline.run(articles[0]);
-console.log(content_pipe);
+//console.log(articles);
+//console.log("length :", articles.length);
+//console.log(articles[7])
+var content_pipe = await pipeline.run(articles[6]);
+//console.log(articles[0])
+//console.log(content_pipe);
 console.log(content_pipe.summary.text);
+
+
+
+
 
 
 
