@@ -4,9 +4,11 @@ import { NativeBaseProvider, FlatList, ScrollView, Divider, Image, Spinner } fro
 import { services } from '../services/services';
 import moment from 'moment';
 import axios from 'axios';
+import { config } from "dotenv";
+config();
 
-const NEWS_API_KEY = '206b9ac974c74f53b9f44291c63eaeed';
-const MEANINGCLOUD_KEY = '5c325ff1ee93843e5fa2e7169fb102dc';
+const NEWS_API_KEY = process.env.NEWS_API_KEY;
+const MEANINGCLOUD_KEY = process.env.MEANINGCLOUD_API_KEY;
 const MEANINGCLOUD_URL = 'https://api.meaningcloud.com/summarization-1.0';
 
 export default function SummaryScreen() {
