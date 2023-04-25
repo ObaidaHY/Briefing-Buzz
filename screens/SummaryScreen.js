@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import { NativeBaseProvider, FlatList, ScrollView, Divider, Image, Spinner } from 'native-base';
-import { services } from '../services/services';
-import moment from 'moment';
-import axios from 'axios';
+import { getArticleSummary } from '../services/bot.mjs';
+import Constants from 'expo-constants';
 
-const NEWS_API_KEY = '206b9ac974c74f53b9f44291c63eaeed';
-const MEANINGCLOUD_KEY = '5c325ff1ee93843e5fa2e7169fb102dc';
-const MEANINGCLOUD_URL = 'https://api.meaningcloud.com/summarization-1.0';
+const NEWS_API_KEY = Constants.manifest.extra.NEWS_API_KEY;
 
 export default function SummaryScreen() {
   const [newsData, setNewsData] = useState([]);
@@ -15,44 +12,42 @@ export default function SummaryScreen() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch news articles from the News API
-    axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${NEWS_API_KEY}`)
-      .then(response => {
-        setNewsData(response.data.articles);
-        setLoading(false);
-  
-        // Retrieve summaries for each article
-        response.data.articles.forEach(article => {
-          getSummary(article.url, article.title);
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    fetchNewsData();
   }, []);
   
+  const fetchNewsData = async () => {
+    try {
+      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=10&apiKey=${NEWS_API_KEY}`);
+      const data = await response.json();
+      setNewsData(data.articles);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  const getSummary = (articleUrl, articleTitle) => {
-    // Send the article to MeaningCloud for summarization
-    const data = {
-      key: MEANINGCLOUD_KEY,
-      url: articleUrl,
-      sentences: 3
-    };
-
-    axios.post(MEANINGCLOUD_URL, data)
-      .then(response => {
-        // Add the summary and title to the summaryData state array
-        setSummaryData(summaryData => [...summaryData, { title: articleTitle, summary: response.data.summary }]);
-      })
-      .catch(error => {
+  const getSummaries = async () => {
+    const summaries = [];
+    for (const article of newsData) {
+      try {
+        const summary = await getArticleSummary(article.url);
+        summaries.push({ title: article.title, summary: summary });
+      } catch (error) {
         console.log(error);
-      });
-  }
-
+      }
+    }
+    setSummaryData(summaries);
+    setLoading(false);
+  };
+  
   const handleNewsPress = (url) => {
     Linking.openURL(url);
-  }
+  };
+
+  useEffect(() => {
+    if (newsData.length > 0) {
+      getSummaries();
+    }
+  }, [newsData]);
 
   return (
     <NativeBaseProvider>

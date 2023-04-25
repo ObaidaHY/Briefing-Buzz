@@ -4,10 +4,6 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import All from './screens/All';
-//import Business from './screens/Business';
-//import HealthScreen from './screens/Health';
-//import SportsScreen from './screens/Sports';
-//import TechScreen from './screens/Tech';
 import { Icon } from 'react-native-elements'
 import FavoritesScreen from './screens/FavoritesScreen';
 import SummaryScreen from './screens/SummaryScreen';
@@ -51,7 +47,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
 
 
 
