@@ -1,8 +1,8 @@
+import fetch from 'node-fetch'
 /*import { OneAI } from 'oneai';
 import Constants from 'expo-constants';
 
 const ONEAI_API_KEY = Constants.manifest.extra.ONEAI_API_KEY;
-
 const oneai = new OneAI(ONEAI_API_KEY);
 
 const pipeline = new oneai.Pipeline(
@@ -10,12 +10,74 @@ const pipeline = new oneai.Pipeline(
    oneai.skills.summarize()
 );
 
-
+*/
 export async function getArticleSummary(link) {
-  let content_pipe = await pipeline.run(link);
-  return (content_pipe.htmlArticle.summary.text);
-  //return '   ';
-}*/
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+      'api-key': "442f0ab5-ea18-470d-b5b7-96a5a0f2f5c3"
+  },
+  body: JSON.stringify({
+      input: link,
+      input_type: "article",
+      output_type: "json",
+      multilingual: {
+        "enabled": true
+      },
+      steps: [
+        {
+          skill: "html-extract-article"
+        },
+        {
+          skill: "summarize"
+        }
+      ]
+    }
+  )
+};
+
+   // Edit this One AI API call using our studio at https://studio.oneai.com/?pipeline=zBBPlo&share=true
+  try {
+  const response = await fetch('https://api.oneai.com/api/v0/pipeline/async', options);
+  const data = await response.json();
+  return data;
+  console.log(data);
+  //const summaryText = response.output[1].contents[0].utterance;
+    
+    //console.log("summaryText");
+    //return summaryText; // returning the summary text
+    }catch (error) {
+      console.log(error);
+  }
+  //let content_pipe = await pipeline.run(link);
+  //return (content_pipe.htmlArticle.summary.text);
+  //return 'abcd';
+}
+var linkk = "https://theathletic.com/4443229/2023/04/23/warriors-draymond-green-steph-curry-kings/"
+
+const text = await getArticleSummary("hi there, I'm obaida. computer science student at tel-aviv university. I'm 22 yaers old. I like playing chess. I believe that we were created to make earth a better place to live in.");
+console.log(text)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 import { OneAI } from 'oneai';
 import Constants from 'expo-constants';

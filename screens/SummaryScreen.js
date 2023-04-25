@@ -6,14 +6,12 @@ import Constants from 'expo-constants';
 
 const NEWS_API_KEY = Constants.manifest.extra.NEWS_API_KEY;
 
-
 export default function SummaryScreen() {
   const [newsData, setNewsData] = useState([]);
   const [summaryData, setSummaryData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch news articles from the News API
     fetchNewsData();
   }, []);
   
@@ -22,30 +20,34 @@ export default function SummaryScreen() {
       const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=10&apiKey=${NEWS_API_KEY}`);
       const data = await response.json();
       setNewsData(data.articles);
-      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getSummaries = async () => {
+    const summaries = [];
+    for (const article of newsData) {
+      try {
+        const summary = await getArticleSummary(article.url);
+        summaries.push({ title: article.title, summary: summary });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    setSummaryData(summaries);
+    setLoading(false);
+  };
   
-      // Retrieve summaries for each article
-      data.articles.forEach(article => {
-        getSummary(article.url, article.title);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getSummary = async (articleUrl, articleTitle) => {
-    try {
-      const summary = await getArticleSummary(articleUrl);
-      // Add the summary and title to the summaryData state array
-      setSummaryData(summaryData => [...summaryData, { title: articleTitle, summary }]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleNewsPress = (url) => {
     Linking.openURL(url);
   };
+
+  useEffect(() => {
+    if (newsData.length > 0) {
+      getSummaries();
+    }
+  }, [newsData]);
 
   return (
     <NativeBaseProvider>
