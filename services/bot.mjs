@@ -1,11 +1,55 @@
-import { OneAI } from 'oneai';
+/*import { OneAI } from 'oneai';
+import Constants from 'expo-constants';
 
-const oneai = new OneAI('4e176a0e-a844-4060-a4fe-4a17e7ecdf56');
+const ONEAI_API_KEY = Constants.manifest.extra.ONEAI_API_KEY;
+
+const oneai = new OneAI(ONEAI_API_KEY);
 
 const pipeline = new oneai.Pipeline(
    oneai.skills.htmlToArticle(),
    oneai.skills.summarize()
 );
+
+
+export async function getArticleSummary(link) {
+  let content_pipe = await pipeline.run(link);
+  return (content_pipe.htmlArticle.summary.text);
+  //return '   ';
+}*/
+/*
+import { OneAI } from 'oneai';
+import Constants from 'expo-constants';
+import * as FileSystem from 'expo-file-system';
+
+const ONEAI_API_KEY = Constants.manifest.extra.ONEAI_API_KEY;
+
+const oneai = new OneAI(ONEAI_API_KEY);
+
+const pipeline = new oneai.Pipeline(
+   oneai.skills.htmlToArticle(),
+   oneai.skills.summarize()
+);
+
+export async function getArticleSummary(link) {
+  let fileUri = FileSystem.documentDirectory + 'temp.html';
+  
+  // Download the file from the link and save it to the document directory
+  await FileSystem.downloadAsync(link, fileUri);
+
+  // Read the contents of the downloaded file
+  let fileContents = await FileSystem.readAsStringAsync(fileUri);
+
+  let content_pipe = await pipeline.run(fileContents);
+  
+  // Delete the temporary file
+  await FileSystem.deleteAsync(fileUri);
+
+  return (content_pipe.htmlArticle.summary.text);
+}
+*/
+
+
+
 /*oneai.skills.names(),
    oneai.skills.summarize(),
    oneai.skills.highlights()*/
@@ -47,11 +91,9 @@ console.log(content_pipe.summary.text); // does we even summarize anything? test
 */
 
 
-import fetch from 'node-fetch';
-import NewsAPI from 'newsapi';
-import cheerio from 'cheerio'
+//import NewsAPI from 'newsapi';
 //const NewsAPI = require('newsapi');
-const newsapi = new NewsAPI('206b9ac974c74f53b9f44291c63eaeed');
+//const newsapi = new NewsAPI(NEWS_API_KEY);
 
 /*fetch(url)
   .then(response => response.json())
@@ -61,6 +103,7 @@ const newsapi = new NewsAPI('206b9ac974c74f53b9f44291c63eaeed');
   })
   .catch(error => console.error(error));*/
 
+  /*
 async function getArticles() {
   const topHeadlines = await newsapi.v2.topHeadlines({
     country: 'us',
@@ -81,7 +124,7 @@ async function getArticles() {
   }
 
   return fullArticles;
-}
+}*/
 
 /*var articles = await getArticles()
 
@@ -95,7 +138,7 @@ console.log(content_pipe.summary.text);*/
 
 
 
-
+/*
 const topHeadlines = await newsapi.v2.topHeadlines({
   country: 'us',
   category: 'general',
@@ -107,7 +150,7 @@ for (let i = 0; i < 1; i++) {
     console.log(content_pipe.htmlArticle.summary.text);
     console.log()
 }
-
+*/
 
 
 

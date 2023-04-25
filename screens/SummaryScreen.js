@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import { NativeBaseProvider, FlatList, ScrollView, Divider, Image, Spinner } from 'native-base';
-import { services } from '../services/services';
-import moment from 'moment';
-import axios from 'axios';
-import { config } from "dotenv";
-config();
+import { getArticleSummary } from '../services/bot.mjs';
+import Constants from 'expo-constants';
 
-const NEWS_API_KEY = process.env.NEWS_API_KEY;
-const MEANINGCLOUD_KEY = process.env.MEANINGCLOUD_API_KEY;
-const MEANINGCLOUD_URL = 'https://api.meaningcloud.com/summarization-1.0';
+const NEWS_API_KEY = Constants.manifest.extra.NEWS_API_KEY;
+
 
 export default function SummaryScreen() {
   const [newsData, setNewsData] = useState([]);
@@ -18,43 +14,38 @@ export default function SummaryScreen() {
 
   useEffect(() => {
     // Fetch news articles from the News API
-    axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${NEWS_API_KEY}`)
-      .then(response => {
-        setNewsData(response.data.articles);
-        setLoading(false);
-  
-        // Retrieve summaries for each article
-        response.data.articles.forEach(article => {
-          getSummary(article.url, article.title);
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    fetchNewsData();
   }, []);
   
-
-  const getSummary = (articleUrl, articleTitle) => {
-    // Send the article to MeaningCloud for summarization
-    const data = {
-      key: MEANINGCLOUD_KEY,
-      url: articleUrl,
-      sentences: 3
-    };
-
-    axios.post(MEANINGCLOUD_URL, data)
-      .then(response => {
-        // Add the summary and title to the summaryData state array
-        setSummaryData(summaryData => [...summaryData, { title: articleTitle, summary: response.data.summary }]);
-      })
-      .catch(error => {
-        console.log(error);
+  const fetchNewsData = async () => {
+    try {
+      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=10&apiKey=${NEWS_API_KEY}`);
+      const data = await response.json();
+      setNewsData(data.articles);
+      setLoading(false);
+  
+      // Retrieve summaries for each article
+      data.articles.forEach(article => {
+        getSummary(article.url, article.title);
       });
-  }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getSummary = async (articleUrl, articleTitle) => {
+    try {
+      const summary = await getArticleSummary(articleUrl);
+      // Add the summary and title to the summaryData state array
+      setSummaryData(summaryData => [...summaryData, { title: articleTitle, summary }]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleNewsPress = (url) => {
     Linking.openURL(url);
-  }
+  };
 
   return (
     <NativeBaseProvider>
