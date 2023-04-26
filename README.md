@@ -37,7 +37,7 @@ To get a ONE AI API key, visit the [ONE AI website](https://oneai.com/) and sign
 <br />
 To get a News API key, visit the [News API website](https://newsapi.org/) and sign up for an account. Once you have signed up, you can access your API key in the dashboard section.<br />
 <br />
-Once you have obtained both API keys, add them to your project inthe relevant places on path : config/config.js
+Once you have obtained both API keys, add them to your project in the relevant constants on path : config/config.js
 
 
 ## Installation
