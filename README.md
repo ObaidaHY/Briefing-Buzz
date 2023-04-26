@@ -11,10 +11,14 @@ Welcome to Briefing Buzz! This app was created using Expo, a free and open-sourc
 - [Built With](#built-with)
 - [Contributing](#contributing)
 
+## Disclaimer
+Please note that this app is still a work in progress. The Brief feature needs final refinements, and the app may not have a polished user interface.<br />
+We are actively working on improving the app's design and user experience, and appreciate any feedback or suggestions you may have.<br /> 
+You may encounter bugs or unexpected behavior while using this app.<br />
+
 ## Getting Started
 
-To get started with this project, clone the repository to your local machine and install the necessary dependencies.
-
+To get started with this project, clone the repository to your local machine and install the necessary dependencies.<br />
 ```bash
 git clone https://github.com/your-username/briefing-buzz.git
 cd briefing-buzz
