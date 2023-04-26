@@ -1,4 +1,5 @@
 //import fetch from 'node-fetch'
+import { ONEAI_API_KEY } from '../config/config';
 /*import { OneAI } from 'oneai';
 import Constants from 'expo-constants';
 
@@ -17,7 +18,7 @@ export async function getArticleSummary(link) {
     headers: {
       accept: 'application/json',
       'content-type': 'application/json',
-      'api-key': "442f0ab5-ea18-470d-b5b7-96a5a0f2f5c3"
+      'api-key': ONEAI_API_KEY
   },
   body: JSON.stringify({
       input: link,
@@ -40,14 +41,15 @@ export async function getArticleSummary(link) {
 
    // Edit this One AI API call using our studio at https://studio.oneai.com/?pipeline=zBBPlo&share=true
   try {
-  const response = await fetch('https://api.oneai.com/api/v0/pipeline/async', options);
+  /*const response = await fetch('https://api.oneai.com/api/v0/pipeline/async', options);
   const data = await response.json();
-  return data;
-  console.log(data);
-  //const summaryText = response.output[1].contents[0].utterance;
+  //return data;
+  //console.log(data);
+  const summaryText = data.output[1].contents[0].utterance;
     
     //console.log("summaryText");
-    //return summaryText; // returning the summary text
+    return summaryText; // returning the summary text*/
+    return "None";
     }catch (error) {
       console.log(error);
   }
@@ -123,7 +125,7 @@ console.log(output.summary.text);*/
 /*
 import axios from 'axios';
 
-const API_KEY = '206b9ac974c74f53b9f44291c63eaeed';
+const API_KEY = ;
 const ARTICLE_URL = 'https://newsapi.org/v2/top-headlines?country=us&category=business';
 
 async function getArticleContent() {

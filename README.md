@@ -12,9 +12,8 @@ Welcome to Briefing Buzz! This app was created using Expo, a free and open-sourc
 - [Contributing](#contributing)
 
 ## Disclaimer
-Please note that this app is still a work in progress. The Brief feature needs final refinements, and the app may not have a polished user interface.<br />
-We are actively working on improving the app's design and user experience, and appreciate any feedback or suggestions you may have.<br /> 
-You may encounter bugs or unexpected behavior while using this app.<br />
+Please note that this app is still a work in progress. The Brief feature needs final refinements, and the app may not have a polished user interface. We are actively working on improving the app's design and user experience, and appreciate any feedback or suggestions you may have.<br /> 
+You may encounter bugs or unexpected behavior while using this app!<br />
 
 ## Getting Started
 

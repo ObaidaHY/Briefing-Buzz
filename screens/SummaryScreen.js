@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import { NativeBaseProvider, FlatList, ScrollView, Divider, Image, Spinner } from 'native-base';
-import { getArticleSummary } from '../services/bot.mjs';
-import Constants from 'expo-constants';
+import { getArticleSummary } from '../services/bot.js';
+import {API_KEY} from '../config/config';
 
-const NEWS_API_KEY = Constants.manifest.extra.NEWS_API_KEY;
 
 export default function SummaryScreen() {
   const [newsData, setNewsData] = useState([]);
@@ -17,7 +16,7 @@ export default function SummaryScreen() {
   
   const fetchNewsData = async () => {
     try {
-      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=10&apiKey=${NEWS_API_KEY}`);
+      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=10&apiKey=${API_KEY}`);
       const data = await response.json();
       setNewsData(data.articles);
     } catch (error) {
@@ -30,7 +29,7 @@ export default function SummaryScreen() {
     for (const article of newsData) {
       try {
         const summary = await getArticleSummary(article.url);
-        summaries.push({ title: article.title, summary: summary });
+        summaries.push({ title: article.title, summary: summary, url : article.url });
       } catch (error) {
         console.log(error);
       }
