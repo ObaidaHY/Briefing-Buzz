@@ -4,7 +4,7 @@
     "slug": "Briefing-Buzz",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/newspaper.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -12,21 +12,26 @@
       "backgroundColor": "#ffffff"
     },
     "extra": {
-      "NEWS_API_KEY" : "206b9ac974c74f53b9f44291c63eaeed",
-      "MEANINGCLOUD_API_KEY" : "5c325ff1ee93843e5fa2e7169fb102dc",
-      "ONEAI_API_KEY" : "442f0ab5-ea18-470d-b5b7-96a5a0f2f5c3"
+      "NEWS_API_KEY": "206b9ac974c74f53b9f44291c63eaeed",
+      "MEANINGCLOUD_API_KEY": "5c325ff1ee93843e5fa2e7169fb102dc",
+      "ONEAI_API_KEY": "442f0ab5-ea18-470d-b5b7-96a5a0f2f5c3",
+      "eas": {
+        "projectId": "6db523fb-8bab-4813-8f31-ded48e42f8e0"
+      }
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.briefingbuzz.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.briefingbuzz.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"

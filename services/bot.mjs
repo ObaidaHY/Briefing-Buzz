@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+//import fetch from 'node-fetch'
 /*import { OneAI } from 'oneai';
 import Constants from 'expo-constants';
 
@@ -55,10 +55,10 @@ export async function getArticleSummary(link) {
   //return (content_pipe.htmlArticle.summary.text);
   //return 'abcd';
 }
-var linkk = "https://theathletic.com/4443229/2023/04/23/warriors-draymond-green-steph-curry-kings/"
+//var linkk = "https://theathletic.com/4443229/2023/04/23/warriors-draymond-green-steph-curry-kings/"
 
-const text = await getArticleSummary("hi there, I'm obaida. computer science student at tel-aviv university. I'm 22 yaers old. I like playing chess. I believe that we were created to make earth a better place to live in.");
-console.log(text)
+//const text = await getArticleSummary("hi there, I'm obaida. computer science student at tel-aviv university. I'm 22 yaers old. I like playing chess. I believe that we were created to make earth a better place to live in.");
+//console.log(text)
 
 
 
