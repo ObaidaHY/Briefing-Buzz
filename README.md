@@ -42,7 +42,7 @@ Once you have obtained both API keys, create a new folder called **config** in t
 export const API_KEY = "<insert your API key here>";
 export const ONEAI_API_KEY = "<insert your ONEAI API key here>";
 ```
-Replace <insert your API key here> and <insert your ONEAI API key here> with your actual API keys
+Replace with your actual API keys.
 
 ## Installation
 Once you have cloned the repository and installed the necessary dependencies, you can run the app on your local machine.
