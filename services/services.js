@@ -1,4 +1,6 @@
-import { API_KEY, endpoint, country } from '../config/config';
+import {API_KEY} from '../config/config';
+const endpoint = "https://newsapi.org/v2/top-headlines";
+const country = 'us';
 
 export async function services(category = 'general') {
     let articles = await fetch(`${endpoint}?country=${country}&category=${category}`, {

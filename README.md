@@ -37,8 +37,12 @@ To get a ONE AI API key, visit the [ONE AI website](https://oneai.com/) and sign
 <br />
 To get a News API key, visit the [News API website](https://newsapi.org/) and sign up for an account. Once you have signed up, you can access your API key in the dashboard section.<br />
 <br />
-Once you have obtained both API keys, add them to your project in the relevant constants on path : config/config.js
-
+Once you have obtained both API keys, create a new folder called **config** in the root directory of the project and define a **config.js** file in that folder with the API keys, like this:
+```arduino
+export const API_KEY = "<insert your API key here>";
+export const ONEAI_API_KEY = "<insert your ONEAI API key here>";
+```
+Replace <insert your API key here> and <insert your ONEAI API key here> with your actual API keys
 
 ## Installation
 Once you have cloned the repository and installed the necessary dependencies, you can run the app on your local machine.
