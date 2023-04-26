@@ -6,6 +6,7 @@ Welcome to Briefing Buzz! This app was created using Expo, a free and open-sourc
 
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
+- [API Keys](#api-keys)
 - [Installation](#installation)
 - [Running the App](#running-the-app)
 - [Built With](#built-with)
@@ -29,6 +30,15 @@ Before you can run this app, you'll need to install Expo CLI. You can do this by
 ```bash
 npm install -g expo-cli
 ```
+
+## API Keys
+To use Briefing Buzz, you will need to obtain API keys for TWO services: ONE AI and News API.<br />
+To get a ONE AI API key, visit the [ONE AI website](https://oneai.com/) and sign up for an account. Once you have signed up, you can access your API key in the account settings section.<br />
+<br />
+To get a News API key, visit the [News API website](https://newsapi.org/) and sign up for an account. Once you have signed up, you can access your API key in the dashboard section.<br />
+<br />
+Once you have obtained both API keys, add them to your project inthe relevant places on path : config/config.js
+
 
 ## Installation
 Once you have cloned the repository and installed the necessary dependencies, you can run the app on your local machine.
