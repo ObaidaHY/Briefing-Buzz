@@ -19,3 +19,9 @@ To get started with this project, clone the repository to your local machine and
 git clone https://github.com/your-username/briefing-buzz.git
 cd briefing-buzz
 npm install
+
+## Prerequisites
+Before you can run this app, you'll need to install Expo CLI. You can do this by running the following command:
+```bash
+npm install -g expo-cli
+
