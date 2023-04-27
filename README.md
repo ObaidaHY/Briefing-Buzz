@@ -20,7 +20,7 @@ You may encounter bugs or unexpected behavior while using this app!<br />
 
 To get started with this project, clone the repository to your local machine and install the necessary dependencies.<br />
 ```bash
-git clone https://github.com/your-username/briefing-buzz.git
+git clone https://github.com/ObaidaHY/Briefing-Buzz.git
 cd briefing-buzz
 npm install
 ```
