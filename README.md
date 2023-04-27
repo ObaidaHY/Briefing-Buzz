@@ -61,7 +61,7 @@ To run the app on your mobile device, you'll need to download the Expo app from 
 * Expo - A free and open-source platform for building React Native apps.<br />
 * React Native - A JavaScript framework for building native mobile apps.<br />
 * React Navigation - A routing and navigation library for React Native apps.<br />
-* ... and more (see package.json for full list).
+... and more (see package.json for full list).
 
 ## Contributing
 If you would like to contribute to this project, please open an issue or pull request on the GitHub repository.
