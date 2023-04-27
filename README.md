@@ -41,7 +41,7 @@ To use Briefing Buzz, you will need to obtain API keys for **TWO** services: ONE
 Once you have obtained both API keys, create a new folder called **config** in the root directory of the project and define a **config.js** file in that folder with the API keys, like this:
 
 ```arduino
-export const API_KEY = "insert your API key here";
+export const API_KEY = "insert your News API key here";
 export const ONEAI_API_KEY = "insert your ONEAI API key here";
 ```
 Replace with your actual API keys.
