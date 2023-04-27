@@ -12,6 +12,67 @@ const pipeline = new oneai.Pipeline(
 );
 
 */
+
+/*
+export async function getArticleSummary(link) {
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+      'api-key': ONEAI_API_KEY
+    },
+    body: JSON.stringify({
+      input: link,
+      input_type: "article",
+      output_type: "json",
+      multilingual: {
+        "enabled": true
+      },
+      steps: [
+        {
+          skill: "html-extract-article"
+        },
+        {
+          skill: "summarize"
+        }
+      ]
+    })
+  };
+
+  try {
+    const response = await fetch('https://api.oneai.com/api/v0/pipeline/async', options);
+    const data = await response.json();
+
+    if (data && data['output'] && data['output']['1'] && data['output']['1']['contents'] && data['output']['1']['contents'].length > 0) {
+      const summaryText = data.output[1].contents[0].utterance;
+      return summaryText;
+    } else {
+      throw new Error('Summary text not found');
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export async function getArticleSummary(link) {
   const options = {
     method: 'POST',
@@ -41,21 +102,18 @@ export async function getArticleSummary(link) {
 
    // Edit this One AI API call using our studio at https://studio.oneai.com/?pipeline=zBBPlo&share=true
   try {
-  /*const response = await fetch('https://api.oneai.com/api/v0/pipeline/async', options);
-  const data = await response.json();
+  //const response = await fetch('https://api.oneai.com/api/v0/pipeline/async', options);
+  //const data = await response.json();
   //return data;
   //console.log(data);
-  const summaryText = data.output[1].contents[0].utterance;
+  //const summaryText = data.output[1].contents[0].utterance;
     
     //console.log("summaryText");
-    return summaryText; // returning the summary text*/
+    //return summaryText; // returning the summary text
     return "None";
     }catch (error) {
       console.log(error);
   }
-  //let content_pipe = await pipeline.run(link);
-  //return (content_pipe.htmlArticle.summary.text);
-  //return 'abcd';
 }
 //var linkk = "https://theathletic.com/4443229/2023/04/23/warriors-draymond-green-steph-curry-kings/"
 
