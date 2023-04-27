@@ -32,7 +32,9 @@ npm install -g expo-cli
 ```
 
 ## API Keys
+
 To use Briefing Buzz, you will need to obtain API keys for **TWO** services: ONE AI and News API.<br />
+<br />
 To get a **ONE AI API key**, visit the [ONE AI website](https://oneai.com/) and sign up for an account. Once you have signed up, you can access your API key in the account settings section.<br />
 <br />
 To get a **News API key**, visit the [News API website](https://newsapi.org/) and sign up for an account. Once you have signed up, you can access your API key in the dashboard section.<br />
