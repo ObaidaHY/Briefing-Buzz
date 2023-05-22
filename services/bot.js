@@ -57,7 +57,35 @@ export async function getArticleSummary(link) {
 }*/
 
 
+import axios from 'axios';
+import cheerio from 'cheerio';
 
+const fetchArticleContent = async (url) => {
+  try {
+    const response = await axios.get(url);
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const articleContent = $('article').text(); // Assuming the article content is wrapped inside an <article> element.
+    return articleContent;
+  } catch (error) {
+    console.error('Error:', error);
+    return 'Error';
+  }
+};
+
+
+const url = 'https://edition.cnn.com/2023/05/16/europe/kyiv-russian-missile-attack-intl-hnk/index.html'; // Replace with your actual article URL
+
+/*fetchArticleContent(url)
+  .then((articleContent) => {
+    if (articleContent) {
+      console.log('Article Content:', articleContent);
+      // Use the article content as needed (e.g., display it in your app)
+    }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });*/
 
 
 
@@ -74,6 +102,8 @@ export async function getArticleSummary(link) {
 
 
 export async function getArticleSummary(link) {
+  //const txt = await fetchArticleContent(link);
+  const txt = "Natural language processing (NLP) is a subfield of linguistics, computer science, and artificial intelligence concerned with the interactions between computers and human language, in particular how to program computers to process and analyze large amounts of natural language data. The goal is a computer capable of 'understanding' the contents of documents, including the contextual nuances of the language within them. The technology can then accurately extract information and insights contained in the documents as well as categorize and organize the documents themselves. Challenges in natural language processing frequently involve speech recognition, natural language understanding, and natural language generation. Based on long-standing trends in the field, it is possible to extrapolate future directions of NLP. As of 2020, three trends among the topics of the long-standing series of CoNLL Shared Tasks can be observed: Interest on increasingly abstract, 'cognitive' aspects of natural language, Increasing interest in multilinguality and Elimination of symbolic representations.";
   const options = {
     method: 'POST',
     headers: {
@@ -82,16 +112,13 @@ export async function getArticleSummary(link) {
       'api-key': ONEAI_API_KEY
   },
   body: JSON.stringify({
-      input: link,
+      input: txt,
       input_type: "article",
       output_type: "json",
       multilingual: {
         "enabled": true
       },
       steps: [
-        {
-          skill: "html-extract-article"
-        },
         {
           skill: "summarize"
         }
@@ -102,15 +129,16 @@ export async function getArticleSummary(link) {
 
    // Edit this One AI API call using our studio at https://studio.oneai.com/?pipeline=zBBPlo&share=true
   try {
-  //const response = await fetch('https://api.oneai.com/api/v0/pipeline/async', options);
-  //const data = await response.json();
+  const response = await fetch('https://api.oneai.com/api/v0/pipeline/async', options);
+  const data = await response.json();
   //return data;
   //console.log(data);
-  //const summaryText = data.output[1].contents[0].utterance;
+  const summaryText = data.output[0].contents[0].utterance;
     
     //console.log("summaryText");
-    //return summaryText; // returning the summary text
-    return "None";
+    console.log(summaryText);
+    return summaryText; // returning the summary text
+    //return "None";
     }catch (error) {
       console.log(error);
   }

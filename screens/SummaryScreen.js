@@ -16,7 +16,7 @@ export default function SummaryScreen() {
   
   const fetchNewsData = async () => {
     try {
-      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=10&apiKey=${API_KEY}`);
+      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=1&apiKey=${API_KEY}`);
       const data = await response.json();
       setNewsData(data.articles);
     } catch (error) {
