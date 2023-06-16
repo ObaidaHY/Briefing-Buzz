@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
-import { NativeBaseProvider, FlatList, ScrollView, Divider, Image, Spinner } from 'native-base';
-import { getArticleSummary } from '../services/bot.js';
-import {API_KEY} from '../config/config';
-
+import { NativeBaseProvider, FlatList, ScrollView, Divider, Spinner } from 'native-base';
+import { API_KEY } from '../config/config';
+import { summarizeArticle } from '../services/connect';
 
 export default function SummaryScreen() {
   const [newsData, setNewsData] = useState([]);
@@ -13,10 +12,10 @@ export default function SummaryScreen() {
   useEffect(() => {
     fetchNewsData();
   }, []);
-  
+
   const fetchNewsData = async () => {
     try {
-      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=1&apiKey=${API_KEY}`);
+      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=5&apiKey=${API_KEY}`);
       const data = await response.json();
       setNewsData(data.articles);
     } catch (error) {
@@ -25,19 +24,19 @@ export default function SummaryScreen() {
   };
 
   const getSummaries = async () => {
-    const summaries = [];
-    for (const article of newsData) {
-      try {
-        const summary = await getArticleSummary(article.url);
-        summaries.push({ title: article.title, summary: summary, url : article.url });
-      } catch (error) {
-        console.log(error);
+    try {
+      const summaries = [];
+      for (const article of newsData) {
+        const sum = await summarizeArticle(article.url);
+        summaries.push({ title: article.title, summary: sum, url: article.url });
       }
+      setSummaryData(summaries);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
     }
-    setSummaryData(summaries);
-    setLoading(false);
   };
-  
+
   const handleNewsPress = (url) => {
     Linking.openURL(url);
   };
@@ -61,12 +60,8 @@ export default function SummaryScreen() {
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => handleNewsPress(item.url)}>
                 <View>
-                  <Text style={styles.summaryTitle}>
-                    {item.title}
-                  </Text>
-                  <Text style={styles.summaryDescription}>
-                    {item.summary}
-                  </Text>
+                  <Text style={styles.summaryTitle}>{item.title}</Text>
+                  <Text style={styles.summaryDescription}>{item.summary}</Text>
                   <Divider my={2} bg="#e0e0e0" />
                 </View>
               </TouchableOpacity>
@@ -78,7 +73,6 @@ export default function SummaryScreen() {
     </NativeBaseProvider>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
