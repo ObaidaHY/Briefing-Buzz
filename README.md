@@ -1,7 +1,6 @@
 # Briefing Buzz
 
-Welcome to Briefing Buzz! This app was created using Expo, a free and open-source platform for building React Native apps.<br />
-It utilizes a server built with Flask for backend functionality, offering the latest news articles and providing article summarization to save you time and enhance your reading experience.
+Welcome to Briefing Buzz! This app was created using Expo, a free and open-source platform for building React Native apps. It utilizes a server built with Flask for backend functionality, offering the latest news articles and providing article summarization to save you time and enhance your reading experience.
 
 <br />
 
