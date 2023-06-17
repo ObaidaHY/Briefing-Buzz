@@ -2,6 +2,8 @@
 
 Welcome to Briefing Buzz! This app was created using Expo, a free and open-source platform for building React Native apps.
 
+<br />
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
@@ -13,10 +15,14 @@ Welcome to Briefing Buzz! This app was created using Expo, a free and open-sourc
 - [Built With](#built-with)
 - [Contributing](#contributing)
 
+<br />
+
 ## Disclaimer
 
 Please note that this app is still a work in progress. The Brief feature needs final refinements, and the app may not have a polished user interface. We are actively working on improving the app's design and user experience, and appreciate any feedback or suggestions you may have.<br />
-You may encounter bugs or unexpected behavior while using this app!<br />
+You may encounter bugs or unexpected behavior while using this app!
+
+<br />
 
 ## Getting Started
 
