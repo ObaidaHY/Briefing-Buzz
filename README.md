@@ -28,6 +28,8 @@ cd briefing-buzz
 npm install
 ```
 
+<br />
+
 ## Prerequisites
 
 Before you can run this app, you'll need to install Expo CLI. You can do this by running the following command:<br />
@@ -62,7 +64,9 @@ export const ONEAI_API_KEY = "insert your ONEAI API key here";
 
 Replace with your actual API keys.
 <br />
-Also make sure to replace `<your-oneai-api>` with your actual ONEAI API key in the `main.py` file.<br />
+Also make sure to replace `<your-oneai-api>` with your actual ONEAI API key in the `main.py` file.
+
+<br />
 
 ## Installation
 
@@ -73,6 +77,7 @@ npm start
 ```
 
 This will start the Expo development server and open the app in your default browser. You can then use the Expo app on your mobile device to scan the QR code and view the app.
+
 <br />
 
 ## Running the Server
