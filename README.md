@@ -1,6 +1,7 @@
 # Briefing Buzz
 
-Welcome to Briefing Buzz! This app was created using Expo, a free and open-source platform for building React Native apps.
+Welcome to Briefing Buzz! This app was created using Expo, a free and open-source platform for building React Native apps.<br />
+It utilizes a server built with Flask for backend functionality, offering the latest news articles and providing article summarization to save you time and enhance your reading experience.
 
 <br />
 
@@ -14,6 +15,7 @@ Welcome to Briefing Buzz! This app was created using Expo, a free and open-sourc
 - [Running the App](#running-the-app)
 - [Built With](#built-with)
 - [Contributing](#contributing)
+- [Project Motive](#project-motive)
 
 <br />
 
@@ -118,3 +120,12 @@ To run the app on your mobile device, you'll need to download the Expo app from 
 ## Contributing
 
 If you would like to contribute to this project, please open an issue or pull request on the GitHub repository.
+
+<br />
+
+## Project Motive
+
+The motive behind building Briefing Buzz is to provide a convenient solution for individuals who want to stay up to date with the latest news and articles while saving time. It is common to come across numerous articles, but reading them all can be time-consuming. Briefing Buzz offers the latest news articles and a unique feature of article summarization. By providing summarized versions of articles in just a few lines, Briefing Buzz enables users to quickly grasp the key points and decide which articles to explore further. This saves time and enhances the reading experience, making it easier to stay informed in today's fast-paced world.
+<br />
+
+We believe that Briefing Buzz can be a valuable tool for anyone seeking a concise yet comprehensive overview of current news and articles. We are continuously working to improve the app's design, user experience, and article summarization feature. We appreciate any feedback or suggestions you may have as we strive to make Briefing Buzz an indispensable app for staying informed efficiently.
