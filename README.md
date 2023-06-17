@@ -82,6 +82,7 @@ Before running the app, you need to start the server. In a separate terminal, na
 python main.py
 ```
 
+Or simply run the main.py python file.<br />
 This will start the Flask server and enable the backend functionality of the app.
 <br />
 
