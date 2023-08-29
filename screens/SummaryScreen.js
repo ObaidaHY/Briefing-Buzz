@@ -15,7 +15,7 @@ export default function SummaryScreen() {
 
   const fetchNewsData = async () => {
     try {
-      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=5&apiKey=${API_KEY}`);
+      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=3&apiKey=${API_KEY}`);
       const data = await response.json();
       setNewsData(data.articles);
     } catch (error) {
@@ -49,7 +49,7 @@ export default function SummaryScreen() {
 
   return (
     <NativeBaseProvider>
-      <ScrollView height={850}>
+      
         {loading ? (
           <View style={styles.spinner}>
             <Spinner color="danger.400" />
@@ -69,7 +69,7 @@ export default function SummaryScreen() {
             keyExtractor={(item, index) => index.toString()}
           />
         )}
-      </ScrollView>
+      
     </NativeBaseProvider>
   );
 }

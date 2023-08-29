@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export async function summarizeArticle(url){
-  const apiUrl = 'http://localhost:5000/summarize';
+  const apiUrl = 'http://172.16.0.92:5000/summarize';
 
   try {
     const response = await axios.post(apiUrl, { url });

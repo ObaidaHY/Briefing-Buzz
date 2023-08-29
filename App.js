@@ -7,6 +7,9 @@ import All from './screens/All';
 import { Icon } from 'react-native-elements'
 import FavoritesScreen from './screens/FavoritesScreen';
 import SummaryScreen from './screens/SummaryScreen';
+import FavSelect from './screens/FavSelect';
+import FavNavigate from './screens/FavNavigate';
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -19,9 +22,7 @@ export default function App() {
               <Icon type='ionicon' name='newspaper-outline' color={props.color} />
             ),
           }} />
-
-        
-        <Tab.Screen name="Favorites" component={FavoritesScreen}
+          <Tab.Screen name="Favorites" component={FavNavigate}
           options={{
             tabBarIcon: (props) => (
               <Icon type='ionicon' name="star" color={props.color} />

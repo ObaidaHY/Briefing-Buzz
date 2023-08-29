@@ -22,7 +22,7 @@ export default function All() {
 
     return (
         <NativeBaseProvider>
-            <ScrollView height={850}>
+            
                 {newsData.length > 1 ? (
                     <FlatList
                         data={newsData}
@@ -60,7 +60,7 @@ export default function All() {
                         <Spinner color="danger.400" />
                     </View>
                 )}
-            </ScrollView>
+            
         </NativeBaseProvider>
     )
 }

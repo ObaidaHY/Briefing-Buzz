@@ -1,32 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, Linking, TouchableOpacity  } from 'react-native';
-import { NativeBaseProvider, FlatList, ScrollView, Divider, Image, Spinner, Checkbox } from 'native-base';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Linking, TouchableOpacity } from 'react-native';
+import { NativeBaseProvider, FlatList, ScrollView, Divider, Image, Spinner } from 'native-base';
 import { services } from '../services/services';
 import moment from 'moment';
 
-export default function FavoritesScreen() {
+export default function FavoritesScreen({ navigation, route }) {
   const [newsData, setNewsData] = useState([]);
-  const [categories, setCategories] = useState(['business', 'entertainment', 'health', 'science', 'sports', 'technology']);
-  const [selectedCategories, setSelectedCategories] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Function to handle selecting/unselecting a category
-  const handleCategorySelect = (category) => {
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== category));
-    } else {
-      setSelectedCategories([...selectedCategories, category]);
+  useEffect(() => {
+    if (route.params?.selectedCategories) {
+      const selectedCategories = route.params.selectedCategories;
+      fetchNewsData(selectedCategories);
     }
-  };
+  }, [route.params?.selectedCategories]);
 
-  // Function to handle fetching news articles from selected categories
-  const fetchNewsData = () => {
+  const fetchNewsData = (selectedCategories) => {
     setLoading(true);
     if (selectedCategories.length > 0) {
-      // Construct the category string for the API call
       const categoryString = selectedCategories.join(',');
 
-      // Fetch news articles from the selected categories
       services(categoryString)
         .then((data) => {
           setNewsData(data);
@@ -42,62 +35,38 @@ export default function FavoritesScreen() {
 
   return (
     <NativeBaseProvider>
-      <ScrollView height={850}>
-        <View style={styles.categorySelectionContainer}>
-          <Text style={styles.categorySelectionText}>Select your preferred news categories:</Text>
-          <View style={styles.categorySelectionButtons}>
-            {categories.map((category) => (
-              <Checkbox
-                key={category}
-                value={selectedCategories.includes(category)}
-                onChange={() => handleCategorySelect(category)}
-                colorScheme="blue"
-                size="lg"
-              >
-                {category}
-              </Checkbox>
-            ))}
-          </View>
-          <Button title="Get News" onPress={fetchNewsData} disabled={selectedCategories.length === 0} />
-        </View>
-        {loading ? (
-          <View style={styles.spinner}>
-            <Spinner color="danger.400" />
-          </View>
-        ) : newsData.length > 0 ? (
+
+        
+        
           <FlatList
-  data={newsData}
-  renderItem={({ item }) => (
-    <View>
-      <View style={styles.newsContainer}>
-        <TouchableOpacity  onPress={() => Linking.openURL(item.url)}>
-          <View>
-            <Image
-              width={550}
-              height={250}
-              resizeMode={'cover'}
-              source={{
-                uri: item.urlToImage,
-              }}
-              alt="Alternate Text"
-            />
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.date}>{moment(item.publishedAt).format('LLL')}</Text>
-            <Text style={styles.newsDescription}>{item.description}</Text>
-          </View>
-        </TouchableOpacity >
-      </View>
-      <Divider my={2} bg="#e0e0e0" />
-    </View>
-  )}
-  keyExtractor={(item) => item.id}
-/>
-        ) : (
-          <View style={styles.noDataContainer}>
-            <Text style={styles.noDataText}>No news articles to display.</Text>
-          </View>
-        )}
-      </ScrollView>
+            data={newsData}
+            renderItem={({ item }) => (
+              <View>
+                <View style={styles.newsContainer}>
+                  <TouchableOpacity  onPress={() => Linking.openURL(item.url)}>
+                    <View>
+                      <Image
+                        width={550}
+                        height={250}
+                        resizeMode={'cover'}
+                        source={{
+                          uri: item.urlToImage,
+                        }}
+                        alt="Alternate Text"
+                      />
+                      <Text style={styles.title}>{item.title}</Text>
+                      <Text style={styles.date}>{moment(item.publishedAt).format('LLL')}</Text>
+                      <Text style={styles.newsDescription}>{item.description}</Text>
+                    </View>
+                  </TouchableOpacity >
+                </View>
+                <Divider my={2} bg="#e0e0e0" />
+              </View>
+            )}
+                keyExtractor={(item) => item.id}
+              />
+
+      
     </NativeBaseProvider>
   );
 }
@@ -108,6 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     paddingHorizontal: 20,
     paddingTop: 20,
+    
   },
   categorySelectionContainer: {
     marginBottom: 20,
